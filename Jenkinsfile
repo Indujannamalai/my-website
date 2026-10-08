@@ -45,7 +45,15 @@ pipeline {
                 '''
             }
         }
-
+        stage('Configure EKS') {
+            steps {
+                sh '''
+                aws eks update-kubeconfig \
+                --region eu-north-1 \
+                --name my-eks-cluster
+                '''
+            }
+        }
         stage('Deploy EKS') {
             steps {
                 sh '''
